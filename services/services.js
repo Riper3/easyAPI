@@ -46,14 +46,44 @@ module.exports = function(server) {
                   luckytodaynumber : luckynumber,
                   lotterynumber : lotterynumber
               };
-
-              return result;
             }
             else
             {
-              return 'Please, check the date';
+              var result =
+              {
+                  mesagge : 'Check the date'
+              };
             }
 
+            return result;
         }
+    });
+
+    server.route({
+        method: 'GET',
+        path: '/horoscope/{horoscope}',
+        handler: function (request, h)
+        {
+            const horoscope = request.params.horoscope;
+
+            const horoscopes = ["aries", "taurus", "gemini", "cancer", "leo", "virgo", "libra", "scorpio", "sagittarius", "capricorn", "aquarius", "pisces"];
+
+            if((horoscopes.indexOf(horoscope) > -1))
+            {
+              var result =
+              {
+                  mesaggetoday : horoscope
+              };
+            }
+            else
+            {
+              var result =
+              {
+                  error : horoscope+" isn't a horoscope ..."
+              };
+            }
+          return result;
+        }
+
     });
 }
